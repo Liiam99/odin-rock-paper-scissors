@@ -1,27 +1,50 @@
-let humanScore = 0;
-let computerScore = 0;
+function playGame() {
+    let totalScore = 0;
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+    for (let round = 1; round <= 5; round++) {
+        console.log(`Round ${round}`);
 
-playRound(humanSelection, computerSelection);
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        const round_score = playRound(humanSelection, computerSelection);
+        totalScore += round_score;
+    }
+
+    if (totalScore > 0) {
+        alert('You won the game!');
+    } else if (totalScore < 0) {
+        alert('You lost the game.');
+    } else {
+        alert('Tie.');
+    }
+}
+
 
 function playRound(humanChoice, computerChoice) {
+    let score;
+
     if (humanChoice == computerChoice) {
         console.log('Tie.');
+
+        score = 0;
     } else if (
             humanChoice == 'rock' && computerChoice == 'scissors'
             || humanChoice == 'paper' && computerChoice == 'rock'
             || humanChoice == 'scissors' && computerChoice == 'paper'
         ) {
             humanChoice = capitaliseFirstLetter(humanChoice);
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-            humanScore++;
+            console.log(`You won the round: ${humanChoice} beats ${computerChoice}`);
+
+            score = 1;
     } else {
         computerChoice = capitaliseFirstLetter(computerChoice);
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-        computerScore++;
+        console.log(`You lost the round: ${computerChoice} beats ${humanChoice}.`);
+
+        score = -1;
     }
+
+    return score;
 }
 
 
@@ -50,7 +73,7 @@ function getHumanChoice() {
     const choices = ['rock', 'paper', 'scissors'];
 
     while (true) {
-        const input = prompt('Rock, paper, scissors?');
+        const input = prompt('Rock, paper, or scissors?');
         const choice = input.toLowerCase();
 
         if (choices.includes(choice)) {
