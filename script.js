@@ -17,3 +17,19 @@ function getComputerChoice() {
 
     return choice;
 }
+
+
+function getHumanChoice() {
+    const choices = ['rock', 'paper', 'scissors'];
+
+    while (true) {
+        const input = prompt('Rock, paper, scissors?');
+        const choice = input.toLowerCase();
+
+        if (choices.includes(choice)) {
+            return choice;
+        }
+
+        console.log('Incorrect input. Choose rock, paper, or scissors');
+    }
+}
