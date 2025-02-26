@@ -1,0 +1,47 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scores {
+    display: flex;
+    margin-bottom: 30px;
+    gap: 30px;
+}
+
+.human-score-container,
+.computer-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scores .header {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.human-score,
+.computer-score {
+    font-size: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.message {
+    margin-top: 10px;
+}
