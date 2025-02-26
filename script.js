@@ -1,50 +1,48 @@
-function playGame() {
-    let totalScore = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('button');
 
-    for (let round = 1; round <= 5; round++) {
-        console.log(`Round ${round}`);
+    let humanScore = 0;
+    let computerScore = 0;
 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const playerSelection = e.target.textContent.toLowerCase();
 
-        const round_score = playRound(humanSelection, computerSelection);
-        totalScore += round_score;
-    }
+            winner = playRound(playerSelection, getComputerChoice());
 
-    if (totalScore > 0) {
-        alert('You won the game!');
-    } else if (totalScore < 0) {
-        alert('You lost the game.');
-    } else {
-        alert('Tie.');
-    }
-}
-
+            if (winner == 'human') {
+                humanScore++;
+            } else if (winner == 'computer') {
+                computerScore++;
+            }
+        });
+    });
+});
 
 function playRound(humanChoice, computerChoice) {
-    let score;
+    let result;
 
     if (humanChoice == computerChoice) {
         console.log('Tie.');
 
-        score = 0;
+        result = 'none';
     } else if (
             humanChoice == 'rock' && computerChoice == 'scissors'
             || humanChoice == 'paper' && computerChoice == 'rock'
             || humanChoice == 'scissors' && computerChoice == 'paper'
         ) {
             humanChoice = capitaliseFirstLetter(humanChoice);
-            console.log(`You won the round: ${humanChoice} beats ${computerChoice}`);
+            console.log(`You won the round: ${humanChoice} beats ${computerChoice}.`);
 
-            score = 1;
+            result = 'human';
     } else {
         computerChoice = capitaliseFirstLetter(computerChoice);
         console.log(`You lost the round: ${computerChoice} beats ${humanChoice}.`);
 
-        score = -1;
+        result = 'computer';
     }
 
-    return score;
+    return result;
 }
 
 
@@ -66,22 +64,6 @@ function getComputerChoice() {
     }
 
     return choice;
-}
-
-
-function getHumanChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
-
-    while (true) {
-        const input = prompt('Rock, paper, or scissors?');
-        const choice = input.toLowerCase();
-
-        if (choices.includes(choice)) {
-            return choice;
-        }
-
-        console.log('Incorrect input. Choose rock, paper, or scissors');
-    }
 }
 
 
